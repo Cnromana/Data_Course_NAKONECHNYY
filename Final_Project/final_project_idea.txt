@@ -1,0 +1,6 @@
+2. #Identification of Antibiotic Resistance Genes using Bacterial Genome analysis
+
+3. #I would like to identify which bacteria carry antibiotic resistance genes. 
+#to do this I would gather genomic data from NCBI and chart the ralation to certain bacteria.
+#I plan to incorporate more categories later on, like grouping by families.
+#to start I will use a scatter plot, but will likely use a dendrogram or maybe a Circulalr Barplot
