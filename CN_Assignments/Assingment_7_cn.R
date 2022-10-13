@@ -54,14 +54,16 @@ Utah %>%
                                    vjust = 0.5,
                                    hjust = ))
 
-#these two plots show side by side rated of different religions in different counties.
+#these two plots show side by side rates of different religions in different counties.
 
 
 
 
 #1.there do seem to be a correlation with a specific religion and populaiton because
 #the most prevalent religion in most of the counties is LDS and in Utah County,
-#the largest county, does contain a large percentage of LDS people.
+#the largest county, does contain a large percentage of LDS people.This pattern seems to be repeated 
+#for other counties.
 
 #2.It appears to be where there is not a high percentage of religious people, there is a larger
-#amount of evangelical people
+#amount of evangelical people. I am not sure if this pattern is enough to be a correlation,
+#but there are examples of this in the plots.
