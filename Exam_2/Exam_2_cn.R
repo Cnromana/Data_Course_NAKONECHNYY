@@ -86,3 +86,5 @@ dat %>% gather_predictions(mod1,mod2,mod3,type="response") %>%
 #again geom_line hates me and will not bring anything up, geom_point is all I got.
 #if you use the same code and replace geom_point with geom_line
 #I guarantee it will show the lines, but my plots go blank when I do it
+
+#checking that all of my code is submitted
