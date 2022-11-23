@@ -1,0 +1,86 @@
+---
+title: "NAKONECHNYY_Skills_Test_3"
+output: html_document
+date: "2022-11-22"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(patchwork)
+library(janitor)
+library(easystats)
+library(modelr)
+library(broom)
+# Task 1: Load the csv files
+
+money <- read_csv(file = "./BIOL3100_Exams/Exam_3/FacultySalaries_1995.csv")
+
+oil <- read_csv(file = "./BIOL3100_Exams/Exam_3/Juniper_Oils.csv")
+
+# Tidy the data
+# Let's use pivot_longer to make each row contain only one observation
+
+
+money1 <- pivot_longer(money, 5:17, names_to = "Observation", values_to = "Total")
+
+
+
+# Re-create the graph shown in "fig1.png"
+money1 %>% filter(grepl('Salary', Observation)) %>% 
+  filter(!grepl('AvgProfSalaryAll', Observation)) %>% 
+  filter(!grepl('VIIB', Tier)) %>% 
+  ggplot(mapping = aes(y = Total,fill = Observation))+
+  geom_boxplot()+facet_grid(~Tier)+theme_minimal()+
+  scale_fill_discrete(name = "Rank", labels = c("Assist", "Assoc", "Full")) +
+  labs(y = "Salary",x = "Rank") +theme(axis.text.x = element_text(angle = 45)) 
+
+
+
+```
+
+
+```{r}
+
+
+money <- read_csv(file = "./BIOL3100_Exams/Exam_3/FacultySalaries_1995.csv")
+
+money <- pivot_longer(money,contains("Salary"),
+                      names_to = "Rank_Salary",
+                      values_to = "Salary")
+aov(money,formula = money$Salary ~
+      money$Tier+money$Rank_Salary+money$State)
+  
+
+```
+
+
+```{r}
+
+
+#Task 3
+
+oil <- pivot_longer(oil, 11:33, names_to = "ChemicalID")
+
+
+# Task 4, plotting
+
+
+oil %>%
+  ggplot(mapping = aes(x = YearsSinceBurn,y = value)) +
+  geom_smooth(method = "loess") +
+  facet_wrap(~ChemicalID, scales = "free") +
+  theme_minimal() +
+  labs(y = "Concentration")
+
+
+mod1 <- glm(formula=oil$Yield_percent~
+              oil$YearsSinceBurn)
+
+tidy(mod1) %>% 
+  filter(p.value< 0.05)
+
+```
+
+
