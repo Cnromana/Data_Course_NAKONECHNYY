@@ -30,18 +30,18 @@ dat <- read.csv("../BIOL3100_Exams/Exam_1/cleaned_covid_data.csv")
 
 #find the peaks of case fatalities
 
-peak <- dat %>% group_by(Province_State) %>% filter(!is.na(Case_Fatality_Ratio)) %>% 
-  summarise(state_max_fatality_rate=max(Case_Fatality_Ratio)) 
+state_max_fatality_rate <- dat %>% group_by(Province_State) %>% filter(!is.na(Case_Fatality_Ratio)) %>% 
+  summarise(Maximum_Fatality_Ratio=max(Case_Fatality_Ratio)) 
 
 #now lets put it in descending order
 
-peak <- peak %>% arrange(desc(state_max_fatality_rate))
+state_max_fatality_rate <- state_max_fatality_rate %>% arrange(desc(Maximum_Fatality_Ratio))
 
 #lets plot it out!
-peak_desc <-  order(desc(peak$state_max_fatality_rate))
 
-peak %>% ggplot(mapping = aes(x = Province_State, y = peak_desc))+
+state_max_fatality_rate %>% ggplot(mapping = aes(x = Province_State, y = Maximum_Fatality_Ratio))+
   geom_bar(mapping=aes(x=reorder(Province_State,
-                                 state_max_fatality_rate)),stat = 'identity')+
+                                 -Maximum_Fatality_Ratio)),stat = 'identity')+
   theme(axis.text.x = element_text(angle = 90)) 
+
 
